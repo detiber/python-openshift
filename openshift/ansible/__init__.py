@@ -1,0 +1,132 @@
+import json
+import re
+import string
+
+from kubernetes import config
+from kubernetes.config.config_exception import ConfigException
+from openshift import client
+
+class AnsibleModuleException(Exception):
+    def __init__(self, msg, **kwargs):
+        self.msg = msg
+        self.value = kwargs
+        self.value['msg'] = msg
+
+    def __str__(self):
+        return json.dumps(self.value)
+
+
+class AnsibleModule(object):
+    def __init__(self, **kwargs):
+        self.types = self._init_types()
+        self._init_client_config(**kwargs)
+
+
+    def _init_client_config(self, **kwargs):
+        kubeconfig = kwargs.get('kubeconfig')
+        context = kwargs.get('context')
+
+        try:
+            # attempt to load the client config from file
+            config.load_kube_config(config_file=kubeconfig, context=context)
+        except IOError as e:
+            # TODO: attempt to create client config from args
+            raise AnsibleModuleException(
+                "Cannot determine api endpoint, please specify kubeconfig",
+                error=str(e)
+            )
+        except ConfigException as e:
+            raise AnsibleModuleException(
+                "Error generating client configuration",
+                error=str(e)
+            )
+        self.config = config
+
+    @staticmethod
+    def _init_types():
+        version_pattern = re.compile("V\d((alpha|beta)\d)?")
+        models = [x for x in dir(client.models) if version_pattern.match(x)]
+
+        types = {}
+        for model in models:
+            match = version_pattern.match(model)
+            version = match.group(0)
+            name = version_pattern.sub('', model)
+            if name in types:
+                types[name]['versions'].append(version)
+            else:
+                types[name] = {'versions': [version]}
+
+            types[name][version] = {'model_class': getattr(client, model), 'methods': {}}
+
+        apis = [x for x in dir(client.apis) if version_pattern.search(x)]
+        apis.append('OapiApi')
+        for api in apis:
+            match = version_pattern.search(api)
+            if match is not None:
+                version = match.group(0)
+                name = version_pattern.sub('', api)[:-3]
+            else:
+                version = 'V1'
+                name = api[:-3]
+            api_class = getattr(client, api)
+
+            for attr in dir(api_class):
+                if attr.endswith('with_http_info'):
+                    continue
+                if attr.endswith('status'):
+                    continue
+
+                method_pattern = re.compile("^(create|delete_collection|delete|list|replace|patch|read)(_namespaced)?_(.*)?")
+                match = method_pattern.match(attr)
+                if match is None:
+                    continue
+
+                method = match.group(1)
+                namespaced = match.group(2) != None
+                object_name = match.group(3)
+
+                all_namespaces = False
+                if attr.endswith('_for_all_namespaces'):
+                    all_namespaces = True
+                    object_name = object_name[:-19]
+
+                object_name = string.capwords(object_name, '_').replace('_','')
+                object_version = version
+
+                # TODO: find a way to better handle these
+                if object_name == 'EvictionEviction':
+                    object_name = 'Eviction'
+                    object_version = 'V1beta1'
+                elif object_name in ['ScaleScale', 'PodLog', 'NamespaceFinalize', 'DeploymentsScale',
+                                     'ReplicasetsScale', 'ReplicationcontrollersScale',
+                                     'LocalResourceAccessReview', 'ResourceAccessReview',
+                                     'BuildRequestClone', 'BuildRequestInstantiate',
+                                     'DeploymentRollbackRollback', 'DeploymentConfigRollbackRollback',
+                                     'DeploymentRequestInstantiate', 'BuildLogLog', 'BindingBinding',
+                                     'CertificateSigningRequestApproval', 'ScheduledJob',
+                                     'DeploymentLogLog', 'SecretListSecrets', 'BuildDetails', '']:
+                    continue
+                if namespaced:
+                    key = 'namespaced'
+                elif all_namespaces:
+                    key = 'all_namespaces'
+                else:
+                    key = 'unnamespaced'
+
+                try:
+                    if key not in types[object_name][object_version]['methods']:
+                        types[object_name][object_version]['methods'][key] = []
+                except KeyError:
+                    print("missing version key for object: {}, api: {}, method: {}".format(object_name, api, attr))
+
+                method_info = {
+                    'type': method,
+                    'name': attr,
+                    'api': api,
+                    'api_class': api_class,
+                }
+                types[object_name][object_version]['methods'][key].append(method_info)
+        return types
+
+
