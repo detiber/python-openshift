@@ -1,3 +1,4 @@
+import copy
 import json
 import re
 import string
@@ -27,12 +28,33 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 "Unkown type {} specified.".format(openshift_type)
             )
 
+        api_versions = [ x.lower() for x in self.openshift_types[openshift_type]['versions']]
         argument_spec = {
             'state': {'default': 'present', 'choices': ['present', 'absent']},
-            'name': {'required': True}
+            'name': {'required': True},
+            'api_version': {'choices': api_versions}
         }
 
         import yaml
+        for version in self.openshift_types[openshift_type]['versions']:
+            print(self.openshift_types[openshift_type][version]['model_class'])
+            print(dir(self.openshift_types[openshift_type][version]['model_class']))
+            print(vars(self.openshift_types[openshift_type][version]['model_class']))
+            model_class = self.openshift_types[openshift_type][version]['model_class']
+            properties = [x for x in dir(model_class) if isinstance(getattr(model_class, x),property)]
+            print(properties)
+            for p in properties:
+                print("\tProperty: {}".format(p))
+                obj = model_class()
+                print("\tType: {}".format(obj.swagger_types[p]))
+                sub_model_class = getattr(client.models, obj.swagger_types[p])
+                sub_props = [x for x in dir(sub_model_class) if isinstance(getattr(sub_model_class, x),property)]
+                for prop in sub_props:
+                    print("\t\tProperty: {}".format(prop))
+                    obj = sub_model_class()
+                    print("\t\tType: {}".format(obj.swagger_types[prop]))
+
+
         print(yaml.dump(argument_spec))
         mutually_exclusive = None
         required_together = None
