@@ -6,23 +6,16 @@ import sys
 
 import yaml
 
-from kubernetes import config
-#from kubernetes.config.exception import ConfigException
-#from kubernetes import client as k8s_client
-#from openshift import client
-
-from openshift.ansible import AnsibleModule, AnsibleModuleException
+from openshift.ansible import OpenShiftAnsibleModule, OpenShiftAnsibleModuleException
 
 def main():
-#    config.load_kube_config()
-
     try:
-        ansible_module = AnsibleModule(context='myproject/10-0-0-51:8443/system:admin')
-    except AnsibleModuleException as e:
+        ansible_module = OpenShiftAnsibleModule('Project')
+    except OpenShiftAnsibleModuleException as e:
         print(e)
         sys.exit(1)
 
-    types = ansible_module.types
+    types = ansible_module.openshift_types
     for t in types:
         for v in types[t]['versions']:
             for key in ('namespaced', 'all_namespaces', 'unnamespaced'):

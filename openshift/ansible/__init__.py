@@ -2,11 +2,13 @@ import json
 import re
 import string
 
+from ansible.module_utils.basic import AnsibleModule
+
 from kubernetes import config
 from kubernetes.config.config_exception import ConfigException
 from openshift import client
 
-class AnsibleModuleException(Exception):
+class OpenShiftAnsibleModuleException(Exception):
     def __init__(self, msg, **kwargs):
         self.msg = msg
         self.value = kwargs
@@ -16,32 +18,53 @@ class AnsibleModuleException(Exception):
         return json.dumps(self.value)
 
 
-class AnsibleModule(object):
-    def __init__(self, **kwargs):
-        self.types = self._init_types()
-        self._init_client_config(**kwargs)
+class OpenShiftAnsibleModule(AnsibleModule):
+    def __init__(self, openshift_type):
+        self.openshift_types = self._init_types()
 
-
-    def _init_client_config(self, **kwargs):
-        kubeconfig = kwargs.get('kubeconfig')
-        context = kwargs.get('context')
-
-        try:
-            # attempt to load the client config from file
-            config.load_kube_config(config_file=kubeconfig, context=context)
-        except IOError as e:
-            # TODO: attempt to create client config from args
-            raise AnsibleModuleException(
-                "Cannot determine api endpoint, please specify kubeconfig",
-                error=str(e)
+        if openshift_type not in self.openshift_types:
+            raise OpenShiftAnsibleModuleException(
+                "Unkown type {} specified.".format(openshift_type)
             )
-        except ConfigException as e:
-            raise AnsibleModuleException(
-                "Error generating client configuration",
-                error=str(e)
-            )
-        self.config = config
 
+        argument_spec = {
+            'state': {'default': 'present', 'choices': ['present', 'absent']},
+            'name': {'required': True}
+        }
+
+        import yaml
+        print(yaml.dump(argument_spec))
+        mutually_exclusive = None
+        required_together = None
+        required_one_of = None
+        required_if = None
+        AnsibleModule.__init__(self, argument_spec, supports_check_mode=True)
+
+#    def __init__(self, **kwargs):
+#        self._init_client_config(**kwargs)
+#        self.check_mode = kwargs.pop('check_mode', None)
+#
+#
+#    def _init_client_config(self, **kwargs):
+#        kubeconfig = kwargs.pop('kubeconfig', None)
+#        context = kwargs.pop('context', None)
+#
+#        try:
+#            # attempt to load the client config from file
+#            config.load_kube_config(config_file=kubeconfig, context=context)
+#        except IOError as e:
+#            # TODO: attempt to create client config from args
+#            raise AnsibleModuleException(
+#                "Cannot determine api endpoint, please specify kubeconfig",
+#                error=str(e)
+#            )
+#        except ConfigException as e:
+#            raise AnsibleModuleException(
+#                "Error generating client configuration",
+#                error=str(e)
+#            )
+#        self.config = config
+#
     @staticmethod
     def _init_types():
         version_pattern = re.compile("V\d((alpha|beta)\d)?")
