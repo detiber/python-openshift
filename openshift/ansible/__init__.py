@@ -8,13 +8,28 @@ from kubernetes import config
 from kubernetes.config.config_exception import ConfigException
 from openshift import client
 
-class OpenShiftAnsibleModuleException(Exception):
-    def __init__(self, msg, **kwargs):
-        self.msg = msg
+
+class OpenShiftAnsibleModuleError(Exception):
+    """
+    Raised when there is an error inside of an Ansible module.
+    """
+
+    def __init__(self, message, **kwargs):
+        """
+        Creates an instance of the AnsibleModuleError class.
+        :param message: The friendly error message.
+        :type message: basestring
+        :param kwargs: All other keyword arguments.
+        :type kwargs: dict
+        """
+        self.message = message
         self.value = kwargs
-        self.value['msg'] = msg
+        self.value['message'] = message
 
     def __str__(self):
+        """
+        String representation of the instance.
+        """
         return json.dumps(self.value)
 
 
@@ -23,7 +38,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
         self.openshift_types = self._init_types()
 
         if openshift_type not in self.openshift_types:
-            raise OpenShiftAnsibleModuleException(
+            raise OpenShiftAnsibleModuleError(
                 "Unkown type {} specified.".format(openshift_type)
             )
 

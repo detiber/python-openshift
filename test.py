@@ -6,12 +6,12 @@ import sys
 
 import yaml
 
-from openshift.ansible import OpenShiftAnsibleModule, OpenShiftAnsibleModuleException
+from openshift.ansible import OpenShiftAnsibleModule, OpenShiftAnsibleModuleError
 
 def main():
     try:
         ansible_module = OpenShiftAnsibleModule('Project')
-    except OpenShiftAnsibleModuleException as e:
+    except OpenShiftAnsibleModuleError as e:
         print(e)
         sys.exit(1)
 
