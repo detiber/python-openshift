@@ -1,12 +1,11 @@
-import copy
 import json
 import re
 import string
 
 from ansible.module_utils.basic import AnsibleModule
 
-from kubernetes import config
-from kubernetes.config.config_exception import ConfigException
+# from kubernetes import config
+# from kubernetes.config.config_exception import ConfigException
 from openshift import client
 
 #: Regular expression for grabbing version
@@ -72,25 +71,25 @@ class OpenShiftAnsibleModule(AnsibleModule):
             print(dir(self.openshift_types[openshift_type][version]['model_class']))
             print(vars(self.openshift_types[openshift_type][version]['model_class']))
             model_class = self.openshift_types[openshift_type][version]['model_class']
-            properties = [x for x in dir(model_class) if isinstance(getattr(model_class, x),property)]
+            properties = [x for x in dir(model_class) if isinstance(getattr(model_class, x), property)]
             print(properties)
             for p in properties:
                 print("\tProperty: {}".format(p))
                 obj = model_class()
                 print("\tType: {}".format(obj.swagger_types[p]))
                 sub_model_class = getattr(client.models, obj.swagger_types[p])
-                sub_props = [x for x in dir(sub_model_class) if isinstance(getattr(sub_model_class, x),property)]
+                sub_props = [x for x in dir(sub_model_class) if isinstance(getattr(sub_model_class, x), property)]
                 for prop in sub_props:
                     print("\t\tProperty: {}".format(prop))
                     obj = sub_model_class()
                     print("\t\tType: {}".format(obj.swagger_types[prop]))
 
-
         print(yaml.dump(argument_spec))
-        mutually_exclusive = None
-        required_together = None
-        required_one_of = None
-        required_if = None
+        # XXX The following are currently unused
+        # mutually_exclusive = None
+        # required_together = None
+        # required_one_of = None
+        # required_if = None
         AnsibleModule.__init__(self, argument_spec, supports_check_mode=True)
 
 #    def __init__(self, **kwargs):
@@ -175,7 +174,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                     all_namespaces = True
                     object_name = object_name[:-19]
 
-                object_name = string.capwords(object_name, '_').replace('_','')
+                object_name = string.capwords(object_name, '_').replace('_', '')
                 object_version = version
 
                 # TODO: find a way to better handle these
