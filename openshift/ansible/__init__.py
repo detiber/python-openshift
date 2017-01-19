@@ -9,6 +9,12 @@ from kubernetes import config
 from kubernetes.config.config_exception import ConfigException
 from openshift import client
 
+#: Regular expression for grabbing version
+VERSION_RX = re.compile("V\d((alpha|beta)\d)?")
+#: Regular expression for grabbing methods
+METHOD_RX = re.compile(
+    "^(create|delete_collection|delete|list|replace|patch|read)(_namespaced)?_(.*)?")
+
 
 class OpenShiftAnsibleModuleError(Exception):
     """
@@ -35,15 +41,25 @@ class OpenShiftAnsibleModuleError(Exception):
 
 
 class OpenShiftAnsibleModule(AnsibleModule):
+    """
+    Abstraction of an OpenShift Ansible Module.
+    """
+
     def __init__(self, openshift_type):
+        """
+        Creates an instance of the OpenShiftAnsibleModule.
+
+        :parameters openshift_type:
+        :type openshift_type:
+        """
         self.openshift_types = self._init_types()
 
-        if openshift_type not in self.openshift_types:
+        if openshift_type not in list(self.openshift_types.keys()):
             raise OpenShiftAnsibleModuleError(
                 "Unkown type {} specified.".format(openshift_type)
             )
 
-        api_versions = [ x.lower() for x in self.openshift_types[openshift_type]['versions']]
+        api_versions = [x.lower() for x in self.openshift_types[openshift_type]['versions']]
         argument_spec = {
             'state': {'default': 'present', 'choices': ['present', 'absent']},
             'name': {'required': True},
@@ -104,14 +120,23 @@ class OpenShiftAnsibleModule(AnsibleModule):
 #
     @staticmethod
     def _init_types():
-        version_pattern = re.compile("V\d((alpha|beta)\d)?")
-        models = [x for x in dir(client.models) if version_pattern.match(x)]
+        """
+        Returns structures of known types.
+
+        .. note::
+
+           This could probably be a private function as now cls is required.
+
+        :returns: Dictionary of name->version->methods describing types.
+        :rtype: dict
+        """
+        models = [x for x in dir(client.models) if VERSION_RX.match(x)]
 
         types = {}
         for model in models:
-            match = version_pattern.match(model)
+            match = VERSION_RX.match(model)
             version = match.group(0)
-            name = version_pattern.sub('', model)
+            name = VERSION_RX.sub('', model)
             if name in types:
                 types[name]['versions'].append(version)
             else:
@@ -119,13 +144,13 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
             types[name][version] = {'model_class': getattr(client, model), 'methods': {}}
 
-        apis = [x for x in dir(client.apis) if version_pattern.search(x)]
+        apis = [x for x in dir(client.apis) if VERSION_RX.search(x)]
         apis.append('OapiApi')
         for api in apis:
-            match = version_pattern.search(api)
+            match = VERSION_RX.search(api)
             if match is not None:
                 version = match.group(0)
-                name = version_pattern.sub('', api)[:-3]
+                name = VERSION_RX.sub('', api)[:-3]
             else:
                 version = 'V1'
                 name = api[:-3]
@@ -137,8 +162,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 if attr.endswith('status'):
                     continue
 
-                method_pattern = re.compile("^(create|delete_collection|delete|list|replace|patch|read)(_namespaced)?_(.*)?")
-                match = method_pattern.match(attr)
+                match = METHOD_RX.match(attr)
                 if match is None:
                     continue
 
@@ -188,5 +212,3 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 }
                 types[object_name][object_version]['methods'][key].append(method_info)
         return types
-
-
