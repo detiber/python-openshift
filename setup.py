@@ -11,6 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+To install the library, run the following
+
+python setup.py install
+
+prerequisite: setuptools
+http://pypi.python.org/pypi/setuptools
+"""
 
 from setuptools import find_packages, setup
 
@@ -20,21 +28,14 @@ CLIENT_VERSION = "1.0.0-snapshot"
 PACKAGE_NAME = "openshift"
 DEVELOPMENT_STATUS = "3 - Alpha"
 
-# To install the library, run the following
-#
-# python setup.py install
-#
-# prerequisite: setuptools
-# http://pypi.python.org/pypi/setuptools
 
-REQUIRES = [
-    "urllib3 >= 1.19",
-    "six >= 1.10",
-    "certifi",
-    "python-dateutil",
-    "pyyaml",
-    "oauth2client",
-    "ipaddress"]
+def extract_requirements(filename):
+    """
+    Extracts requirements from a pip formatted requirements file.
+    """
+    with open(filename, 'r') as requirements_file:
+        return [x.split()[0] for x in requirements_file.readlines()]
+
 
 setup(
     name=PACKAGE_NAME,
@@ -45,13 +46,11 @@ setup(
     license="Apache License Version 2.0",
     url="https://github.com/ftl-toolbox/python-openshift",
     keywords=["Swagger", "OpenAPI", "Kubernetes", "OpenShift"],
-    install_requires=REQUIRES,
-    packages=['openshift', 'openshift.client', 'openshift.client.apis',
-              'openshift.client.models'],
+    install_requires=extract_requirements('requirements.txt'),
+    test_requires=extract_requirements('test-requirements.txt'),
+    packages=find_packages('.'),
     include_package_data=True,
-    long_description="""\
-    Python client for OpenShift http://openshift.io/
-    """,
+    long_description='Python client for OpenShift http://openshift.io/',
     classifiers=[
         "Development Status :: %s" % DEVELOPMENT_STATUS,
         "Topic :: Utilities",
