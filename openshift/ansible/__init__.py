@@ -1,13 +1,18 @@
-import copy
 import json
 import re
 import string
 
 from ansible.module_utils.basic import AnsibleModule
 
-from kubernetes import config
-from kubernetes.config.config_exception import ConfigException
+# from kubernetes import config
+# from kubernetes.config.config_exception import ConfigException
 from openshift import client
+
+#: Regular expression for grabbing version
+VERSION_RX = re.compile("V\d((alpha|beta)\d)?")
+#: Regular expression for grabbing methods
+METHOD_RX = re.compile(
+    "^(create|delete_collection|delete|list|replace|patch|read)(_namespaced)?_(.*)?")
 
 
 class OpenShiftAnsibleModuleError(Exception):
@@ -35,15 +40,25 @@ class OpenShiftAnsibleModuleError(Exception):
 
 
 class OpenShiftAnsibleModule(AnsibleModule):
+    """
+    Abstraction of an OpenShift Ansible Module.
+    """
+
     def __init__(self, openshift_type):
+        """
+        Creates an instance of the OpenShiftAnsibleModule.
+
+        :parameters openshift_type:
+        :type openshift_type:
+        """
         self.openshift_types = self._init_types()
 
-        if openshift_type not in self.openshift_types:
+        if openshift_type not in list(self.openshift_types.keys()):
             raise OpenShiftAnsibleModuleError(
                 "Unkown type {} specified.".format(openshift_type)
             )
 
-        api_versions = [ x.lower() for x in self.openshift_types[openshift_type]['versions']]
+        api_versions = [x.lower() for x in self.openshift_types[openshift_type]['versions']]
         argument_spec = {
             'state': {'default': 'present', 'choices': ['present', 'absent']},
             'name': {'required': True},
@@ -56,25 +71,25 @@ class OpenShiftAnsibleModule(AnsibleModule):
             print(dir(self.openshift_types[openshift_type][version]['model_class']))
             print(vars(self.openshift_types[openshift_type][version]['model_class']))
             model_class = self.openshift_types[openshift_type][version]['model_class']
-            properties = [x for x in dir(model_class) if isinstance(getattr(model_class, x),property)]
+            properties = [x for x in dir(model_class) if isinstance(getattr(model_class, x), property)]
             print(properties)
             for p in properties:
                 print("\tProperty: {}".format(p))
                 obj = model_class()
                 print("\tType: {}".format(obj.swagger_types[p]))
                 sub_model_class = getattr(client.models, obj.swagger_types[p])
-                sub_props = [x for x in dir(sub_model_class) if isinstance(getattr(sub_model_class, x),property)]
+                sub_props = [x for x in dir(sub_model_class) if isinstance(getattr(sub_model_class, x), property)]
                 for prop in sub_props:
                     print("\t\tProperty: {}".format(prop))
                     obj = sub_model_class()
                     print("\t\tType: {}".format(obj.swagger_types[prop]))
 
-
         print(yaml.dump(argument_spec))
-        mutually_exclusive = None
-        required_together = None
-        required_one_of = None
-        required_if = None
+        # XXX The following are currently unused
+        # mutually_exclusive = None
+        # required_together = None
+        # required_one_of = None
+        # required_if = None
         AnsibleModule.__init__(self, argument_spec, supports_check_mode=True)
 
 #    def __init__(self, **kwargs):
@@ -104,14 +119,23 @@ class OpenShiftAnsibleModule(AnsibleModule):
 #
     @staticmethod
     def _init_types():
-        version_pattern = re.compile("V\d((alpha|beta)\d)?")
-        models = [x for x in dir(client.models) if version_pattern.match(x)]
+        """
+        Returns structures of known types.
+
+        .. note::
+
+           This could probably be a private function as now cls is required.
+
+        :returns: Dictionary of name->version->methods describing types.
+        :rtype: dict
+        """
+        models = [x for x in dir(client.models) if VERSION_RX.match(x)]
 
         types = {}
         for model in models:
-            match = version_pattern.match(model)
+            match = VERSION_RX.match(model)
             version = match.group(0)
-            name = version_pattern.sub('', model)
+            name = VERSION_RX.sub('', model)
             if name in types:
                 types[name]['versions'].append(version)
             else:
@@ -119,13 +143,13 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
             types[name][version] = {'model_class': getattr(client, model), 'methods': {}}
 
-        apis = [x for x in dir(client.apis) if version_pattern.search(x)]
+        apis = [x for x in dir(client.apis) if VERSION_RX.search(x)]
         apis.append('OapiApi')
         for api in apis:
-            match = version_pattern.search(api)
+            match = VERSION_RX.search(api)
             if match is not None:
                 version = match.group(0)
-                name = version_pattern.sub('', api)[:-3]
+                name = VERSION_RX.sub('', api)[:-3]
             else:
                 version = 'V1'
                 name = api[:-3]
@@ -137,8 +161,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 if attr.endswith('status'):
                     continue
 
-                method_pattern = re.compile("^(create|delete_collection|delete|list|replace|patch|read)(_namespaced)?_(.*)?")
-                match = method_pattern.match(attr)
+                match = METHOD_RX.match(attr)
                 if match is None:
                     continue
 
@@ -151,7 +174,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                     all_namespaces = True
                     object_name = object_name[:-19]
 
-                object_name = string.capwords(object_name, '_').replace('_','')
+                object_name = string.capwords(object_name, '_').replace('_', '')
                 object_version = version
 
                 # TODO: find a way to better handle these
@@ -188,5 +211,3 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 }
                 types[object_name][object_version]['methods'][key].append(method_info)
         return types
-
-
