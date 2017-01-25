@@ -56,18 +56,50 @@ class OpenShiftAnsibleModule(AnsibleModule):
             print(dir(self.openshift_types[openshift_type][version]['model_class']))
             print(vars(self.openshift_types[openshift_type][version]['model_class']))
             model_class = self.openshift_types[openshift_type][version]['model_class']
-            properties = [x for x in dir(model_class) if isinstance(getattr(model_class, x),property)]
+            model_obj = model_class()
+            properties = self._properties_from_model(model_class)
             print(properties)
+
+            if 'metadata' not in properties:
+                raise OpenShiftAnsibleModuleError(
+                    "Object {} does not contain metadata field".format(model_class)
+                )
+
             for p in properties:
+                sub_model_class = getattr(client.models, model_obj.swagger_types[p])
+                sub_props = self._properties_from_model(sub_model_class)
+                sub_obj = sub_model_class()
+
                 print("\tProperty: {}".format(p))
-                obj = model_class()
-                print("\tType: {}".format(obj.swagger_types[p]))
-                sub_model_class = getattr(client.models, obj.swagger_types[p])
-                sub_props = [x for x in dir(sub_model_class) if isinstance(getattr(sub_model_class, x),property)]
+                print("\tType: {}".format(model_obj.swagger_types[p]))
                 for prop in sub_props:
                     print("\t\tProperty: {}".format(prop))
-                    obj = sub_model_class()
-                    print("\t\tType: {}".format(obj.swagger_types[prop]))
+                    print("\t\tType: {}".format(sub_obj.swagger_types[prop]))
+
+                if p == 'metadata':
+                    if not isinstance(sub_obj, client.V1ObjectMeta):
+                        raise OpenShiftAnsibleModuleError(
+                            "Unknown metadata type: {}".format(sub_model_class)
+                        )
+                    for prop in sub_props:
+                        # TODO: filter namespace based on object methods
+                        # available
+                        if prop in ['labels', 'annotations', 'namespace']:
+                            if prop in argument_spec:
+                                raise OpenShiftAnsibleModuleError(
+                                    "param {} already present in argument_spec".format(prop)
+                                )
+                            argument_spec[prop] = {'required': False, 'type': sub_obj.swagger_types[prop]}
+                elif p == 'status':
+                    continue
+                else:
+                    for prop in sub_props:
+                        if prop in argument_spec:
+                            raise OpenShiftAnsibleModuleError(
+                                "param {} already present in argument_spec".format(prop)
+                            )
+                        argument_spec[p+'_'+prop] = {'required': False, 'type': sub_obj.swagger_types[prop]}
+
 
 
         print(yaml.dump(argument_spec))
@@ -76,6 +108,10 @@ class OpenShiftAnsibleModule(AnsibleModule):
         required_one_of = None
         required_if = None
         AnsibleModule.__init__(self, argument_spec, supports_check_mode=True)
+
+    @staticmethod
+    def _properties_from_model(model_class):
+        return [x for x in dir(model_class) if isinstance(getattr(model_class, x), property)]
 
 #    def __init__(self, **kwargs):
 #        self._init_client_config(**kwargs)
