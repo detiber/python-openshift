@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **config** | [**V1ObjectReference**](V1ObjectReference.md) | config is an ObjectReference to the BuildConfig this Build is based on. | [optional] 
 **duration** | **int** | duration contains time.Duration object describing build time. | [optional] 
 **message** | **str** | message is a human-readable message indicating details about why the build has this status. | [optional] 
+**output** | [**V1BuildStatusOutput**](V1BuildStatusOutput.md) | output describes the Docker image the build has produced. | [optional] 
 **output_docker_image_reference** | **str** | outputDockerImageReference contains a reference to the Docker image that will be built by this build. Its value is computed from Build.Spec.Output.To, and should include the registry address, so that it can be used to push and pull the image. | [optional] 
 **phase** | **str** | phase is the point in the build lifecycle. | 
 **reason** | **str** | reason is a brief CamelCase string that describes any failure and is meant for machine parsing and tidy display in the CLI. | [optional] 
