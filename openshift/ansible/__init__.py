@@ -36,6 +36,7 @@ class OpenShiftAnsibleModuleError(Exception):
 
 class OpenShiftAnsibleModule(AnsibleModule):
     def __init__(self, openshift_type):
+        self.openshift_type = openshift_type
         self.openshift_types = self._init_types()
 
         if openshift_type not in self.openshift_types:
@@ -47,18 +48,19 @@ class OpenShiftAnsibleModule(AnsibleModule):
         argument_spec = {
             'state': {'default': 'present', 'choices': ['present', 'absent']},
             'name': {'required': True},
-            'api_version': {'choices': api_versions}
+            'kubeconfig': {},
+            'context': {},
+            'api_version': {'choices': api_versions, 'required': True}
         }
 
-        import yaml
         for version in self.openshift_types[openshift_type]['versions']:
-            print(self.openshift_types[openshift_type][version]['model_class'])
-            print(dir(self.openshift_types[openshift_type][version]['model_class']))
-            print(vars(self.openshift_types[openshift_type][version]['model_class']))
+            #print(self.openshift_types[openshift_type][version]['model_class'])
+            #print(dir(self.openshift_types[openshift_type][version]['model_class']))
+            #print(vars(self.openshift_types[openshift_type][version]['model_class']))
             model_class = self.openshift_types[openshift_type][version]['model_class']
             model_obj = model_class()
             properties = self._properties_from_model(model_class)
-            print(properties)
+            #print(properties)
 
             if 'metadata' not in properties:
                 raise OpenShiftAnsibleModuleError(
@@ -70,74 +72,98 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 sub_props = self._properties_from_model(sub_model_class)
                 sub_obj = sub_model_class()
 
-                print("\tProperty: {}".format(p))
-                print("\tType: {}".format(model_obj.swagger_types[p]))
-                for prop in sub_props:
-                    print("\t\tProperty: {}".format(prop))
-                    print("\t\tType: {}".format(sub_obj.swagger_types[prop]))
+                if p == 'status':
+                    continue
 
+#                print("\tProperty: {}".format(p))
+#                print("\tType: {}".format(model_obj.swagger_types[p]))
+#                for prop in sub_props:
+#                    print("\t\tProperty: {}".format(prop))
+#                    prop_type = sub_obj.swagger_types[prop]
+#                    print("\t\tType: {} ({})".format(prop_type, type(prop_type)))
+#
                 if p == 'metadata':
                     if not isinstance(sub_obj, client.V1ObjectMeta):
                         raise OpenShiftAnsibleModuleError(
                             "Unknown metadata type: {}".format(sub_model_class)
                         )
                     for prop in sub_props:
-                        # TODO: filter namespace based on object methods
-                        # available
-                        if prop in ['labels', 'annotations', 'namespace']:
-                            if prop in argument_spec:
-                                raise OpenShiftAnsibleModuleError(
-                                    "param {} already present in argument_spec".format(prop)
-                                )
-                            argument_spec[prop] = {'required': False, 'type': sub_obj.swagger_types[prop]}
-                elif p == 'status':
-                    continue
+                        if prop in ['labels', 'annotations']:
+                            argument_spec[prop] = {'required': False, 'type': 'dict'}
+                        elif prop in ['namespace']:
+                            methods = self.openshift_types[openshift_type][version]['methods']
+                            if 'namespaced' in methods:
+                                if 'unnamespaced' in methods:
+                                    required = False
+                                else:
+                                    required = True
+                                argument_spec[prop] = {'required': required}
                 else:
                     for prop in sub_props:
+                        prop_type = sub_obj.swagger_types[prop]
+                        if isinstance(prop_type, str) and prop_type.startswith('dict('):
+                            ansible_type = 'dict'
+                        elif isinstance(prop_type, str) and prop_type.startswith('list['):
+                            ansible_type = 'list'
+                        else:
+                            ansible_type = prop_type
+
                         if prop in argument_spec:
                             raise OpenShiftAnsibleModuleError(
                                 "param {} already present in argument_spec".format(prop)
                             )
-                        argument_spec[p+'_'+prop] = {'required': False, 'type': sub_obj.swagger_types[prop]}
+                        argument_spec[p+'_'+prop] = {'required': False, 'type': ansible_type}
 
-
-
-        print(yaml.dump(argument_spec))
         mutually_exclusive = None
         required_together = None
         required_one_of = None
         required_if = None
         AnsibleModule.__init__(self, argument_spec, supports_check_mode=True)
 
+    def execute_module(self):
+        print(self.params)
+        api_version = self.params.pop('api_version')
+        name = self.params.pop('name')
+        kubeconfig = self.params.pop('kubeconfig')
+        context = self.params.pop('context')
+
+        try:
+            config = self._get_client_config(kubeconfig, context)
+        except OpenShiftAnsibleModuleError as e:
+            self.fail_json(msg='Error loading config', error=str(e))
+
+        # TODO: test and retrieve current object if exists
+        # TODO: delete object if exists and state absent
+        # TODO: test values of provided arguments if state present
+        # TODO: update object if state present and provided arguments differ
+
+    @staticmethod
+    def _get_openshift_object(config):
+        pass
+
+
     @staticmethod
     def _properties_from_model(model_class):
         return [x for x in dir(model_class) if isinstance(getattr(model_class, x), property)]
 
-#    def __init__(self, **kwargs):
-#        self._init_client_config(**kwargs)
-#        self.check_mode = kwargs.pop('check_mode', None)
-#
-#
-#    def _init_client_config(self, **kwargs):
-#        kubeconfig = kwargs.pop('kubeconfig', None)
-#        context = kwargs.pop('context', None)
-#
-#        try:
-#            # attempt to load the client config from file
-#            config.load_kube_config(config_file=kubeconfig, context=context)
-#        except IOError as e:
-#            # TODO: attempt to create client config from args
-#            raise AnsibleModuleException(
-#                "Cannot determine api endpoint, please specify kubeconfig",
-#                error=str(e)
-#            )
-#        except ConfigException as e:
-#            raise AnsibleModuleException(
-#                "Error generating client configuration",
-#                error=str(e)
-#            )
-#        self.config = config
-#
+    @staticmethod
+    def _get_client_config(kubeconfig, context):
+        try:
+            # attempt to load the client config from file
+            config.load_kube_config(config_file=kubeconfig, context=context)
+        except IOError as e:
+            # TODO: attempt to create client config from args
+            raise OpenShiftAnsibleModuleError(
+                "Cannot determine api endpoint, please specify kubeconfig",
+                error=str(e)
+            )
+        except ConfigException as e:
+            raise OpenShiftAnsibleModuleError(
+                "Error generating client configuration",
+                error=str(e)
+            )
+        return config
+
     @staticmethod
     def _init_types():
         version_pattern = re.compile("V\d((alpha|beta)\d)?")

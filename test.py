@@ -10,9 +10,9 @@ from openshift.ansible import OpenShiftAnsibleModule, OpenShiftAnsibleModuleErro
 
 def main():
     try:
-        ansible_module = OpenShiftAnsibleModule('Project')
         ansible_module = OpenShiftAnsibleModule('Pod')
-        ansible_module = OpenShiftAnsibleModule('ServiceAccount')
+        ansible_module = OpenShiftAnsibleModule('Job')
+#        ansible_module = OpenShiftAnsibleModule('ServiceAccount')
         ansible_module = OpenShiftAnsibleModule('DeploymentConfig')
     except OpenShiftAnsibleModuleError as e:
         print(e)
@@ -30,10 +30,10 @@ def main():
 #                if len(unique_apis) > 1:
 #                    print("Multiple apis for type: {}, version: {}, object: \n{}\n\n".format(t, v, yaml.dump(types[t])))
 #
-#    for obj in ('Pod', 'Deployment', 'DeploymentConfig', 'BuildConfig', 'StatefulSet', 'Job'):
+#    for obj in ('Project', 'Pod', 'Deployment', 'DeploymentConfig', 'BuildConfig', 'StatefulSet', 'Job'):
 #        print("looking for object: {}".format(obj))
 #        print(yaml.dump(types[obj]))
-
+#
 
 if __name__ == '__main__':
     main()
