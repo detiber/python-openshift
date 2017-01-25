@@ -7,6 +7,7 @@ from ansible.module_utils.basic import AnsibleModule
 
 from kubernetes import config
 from kubernetes.config.config_exception import ConfigException
+from kubernetes.client.rest import ApiException
 from openshift import client
 
 
@@ -122,18 +123,49 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
     def execute_module(self):
         print(self.params)
+        state = self.params.pop('state')
         api_version = self.params.pop('api_version')
         name = self.params.pop('name')
         kubeconfig = self.params.pop('kubeconfig')
         context = self.params.pop('context')
+        namespace = self.params.pop('namespace', None)
 
         try:
             config = self._get_client_config(kubeconfig, context)
         except OpenShiftAnsibleModuleError as e:
             self.fail_json(msg='Error loading config', error=str(e))
 
-        # TODO: test and retrieve current object if exists
-        # TODO: delete object if exists and state absent
+        import yaml
+        print(yaml.dump(self.openshift_types[self.openshift_type][api_version.upper()]))
+
+        method_key = 'unnamespaced' if namespace is None else 'namespaced'
+        type_info = self.openshift_types[self.openshift_type][api_version.upper()]
+        api_class = type_info['methods'][method_key]['read']['api_class']
+        api_obj = api_class()
+        obj_get = getattr(api_obj, type_info['methods'][method_key]['read']['name'])
+        existing = None
+        try:
+            existing = obj_get(name)
+        except ApiException as e:
+            if e.status != 404:
+                raise
+
+        return_attributes = {
+            'changed': False,
+            'api_version': api_version,
+            self.openshift_type: None
+        }
+
+        if state == 'absent':
+            if existing is None:
+                self.exit_json(**return_attributes)
+            else:
+                if not self.check_mode:
+                    obj_delete = getattr(api_obj, type_info['methods'][method_key]['delete']['name'])
+                    obj_delete(name)
+                return_attributes['changed'] = True
+                self.exit_json(**return_attributes)
+
         # TODO: test values of provided arguments if state present
         # TODO: update object if state present and provided arguments differ
 
@@ -238,17 +270,17 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
                 try:
                     if key not in types[object_name][object_version]['methods']:
-                        types[object_name][object_version]['methods'][key] = []
+                        types[object_name][object_version]['methods'][key] = {}
                 except KeyError:
                     print("missing version key for object: {}, api: {}, method: {}".format(object_name, api, attr))
 
                 method_info = {
-                    'type': method,
                     'name': attr,
                     'api': api,
                     'api_class': api_class,
                 }
-                types[object_name][object_version]['methods'][key].append(method_info)
+                if method not in types[object_name][object_version]['methods'][key]:
+                    types[object_name][object_version]['methods'][key][method] = method_info
         return types
 
 

@@ -10,7 +10,7 @@ from openshift.ansible import OpenShiftAnsibleModule, OpenShiftAnsibleModuleErro
 
 def main():
     try:
-        for obj in ('Namespace', 'Project'):
+        for obj in ('Project', 'Namespace'):
             ansible_module = OpenShiftAnsibleModule(obj)
 
             print("argument spec for object: {}".format(obj))

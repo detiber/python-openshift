@@ -434,6 +434,6 @@ from .apis.storage_v1beta1_api import StorageV1beta1Api
 from .apis.version_api import VersionApi
 
 # import ApiClient
-from kubernetes.client.api_client import ApiClient
+from .api_client import ApiClient
 
 from kubernetes.client.configuration import Configuration, ConfigurationObject, configuration

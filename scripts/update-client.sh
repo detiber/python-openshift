@@ -55,7 +55,6 @@ mvn -f "${SCRIPT_ROOT}/pom.xml" clean generate-sources -Dgenerator.spec.path="${
 echo "--- Patching generated code..."
 find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/openshift.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.py -exec sed -i 's/^from \.\+configuration/from kubernetes.client.configuration/g' {} +
-find "${CLIENT_ROOT}/" -type f -name \*.py -exec sed -i 's/^from \.\+api_client/from kubernetes.client.api_client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.py -exec sed -i 's/^from \.\+rest/from kubernetes.client.rest/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/\bclient/openshift.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/openshift.client-python/client-python/g' {} +
