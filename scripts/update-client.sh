@@ -59,6 +59,11 @@ find "${CLIENT_ROOT}/" -type f -name \*.py -exec sed -i 's/^from \.\+rest/from k
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/\bclient/openshift.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/openshift.client-python/client-python/g' {} +
 rm "${CLIENT_ROOT}/LICENSE" || true
+
+head -n -3 "${CLIENT_ROOT}/client/__init__.py" > "${CLIENT_ROOT}/client/__init__.py.new"
+echo "from kubernetes.client.configuration import Configuration, ConfigurationObject, configuration" >> "${CLIENT_ROOT}/client/__init__.py.new"
+mv "${CLIENT_ROOT}/client/__init__.py.new" "${CLIENT_ROOT}/client/__init__.py"
+
 echo "--- updating version information..."
 sed -i'' "s/^CLIENT_VERSION = .*/CLIENT_VERSION = \\\"${CLIENT_VERSION}\\\"/" "${SCRIPT_ROOT}/../setup.py"
 sed -i'' "s/^PACKAGE_NAME = .*/PACKAGE_NAME = \\\"${PACKAGE_NAME}\\\"/" "${SCRIPT_ROOT}/../setup.py"

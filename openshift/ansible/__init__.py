@@ -69,6 +69,12 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 )
 
             for p in properties:
+                sub_prop_type = model_obj.swagger_types[p]
+
+                # TODO: handle primitive types at top level
+                if sub_prop_type == 'str':
+                    continue
+
                 sub_model_class = getattr(client.models, model_obj.swagger_types[p])
                 sub_props = self._properties_from_model(sub_model_class)
                 sub_obj = sub_model_class()
@@ -122,7 +128,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
         AnsibleModule.__init__(self, argument_spec, supports_check_mode=True)
 
     def execute_module(self):
-        print(self.params)
+        #print(self.params)
         state = self.params.pop('state')
         api_version = self.params.pop('api_version')
         name = self.params.pop('name')
@@ -135,8 +141,8 @@ class OpenShiftAnsibleModule(AnsibleModule):
         except OpenShiftAnsibleModuleError as e:
             self.fail_json(msg='Error loading config', error=str(e))
 
-        import yaml
-        print(yaml.dump(self.openshift_types[self.openshift_type][api_version.upper()]))
+        #import yaml
+        #print(yaml.dump(self.openshift_types[self.openshift_type][api_version.upper()]))
 
         method_key = 'unnamespaced' if namespace is None else 'namespaced'
         type_info = self.openshift_types[self.openshift_type][api_version.upper()]
