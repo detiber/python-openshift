@@ -8,7 +8,7 @@ from openshift.ansible import (
 
 def main():
     try:
-        module = OpenShiftAnsibleModule('Namespace')
+        module = OpenShiftAnsibleModule('Namespace', 'V1')
         module.execute_module()
     except OpenShiftAnsibleModuleError as e:
         print(e)

@@ -3,10 +3,9 @@ import pytest
 
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
 def test_namespace_delete_noop(ansible_module):
-    contacted = ansible_module.k8s_namespace(
+    contacted = ansible_module.k8s_v1_namespace(
         name='test',
-        state='absent',
-        api_version='v1'
+        state='absent'
     )
 
     for host, result in contacted.items():
