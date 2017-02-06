@@ -7,8 +7,7 @@ import yaml
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
 def test_namespace_delete_noop(ansible_module):
     contacted = ansible_module.k8s_v1_namespace(
-        name='test_delete_noop',
-        state='absent'
+        name='test_delete_noop', state='absent'
     )
 
     for host in contacted.keys():
@@ -23,8 +22,7 @@ def test_namespace_delete_noop(ansible_module):
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
 def test_namespace_lifecycle(ansible_module):
     contacted = ansible_module.k8s_v1_namespace(
-        name='test-namespace-lifecycle',
-        state='present'
+        name='test-namespace-lifecycle', state='present'
     )
 
     for host in contacted.keys():
@@ -35,8 +33,7 @@ def test_namespace_lifecycle(ansible_module):
         assert result['changed'] is True
 
     contacted = ansible_module.k8s_v1_namespace(
-        name='test-namespace-create',
-        state='present'
+        name='test-namespace-create', state='present'
     )
 
     for host in contacted.keys():
@@ -47,8 +44,7 @@ def test_namespace_lifecycle(ansible_module):
         assert result['changed'] is False
 
     contacted = ansible_module.k8s_v1_namespace(
-        name='test-namespace-create',
-        state='absent'
+        name='test-namespace-create', state='absent'
     )
 
     for host in contacted.keys():

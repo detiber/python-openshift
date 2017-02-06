@@ -1,8 +1,8 @@
 import copy
 import json
 import re
-import string
-import yaml
+# import string
+# import yaml
 
 import string_utils
 
@@ -13,8 +13,8 @@ from kubernetes.config.config_exception import ConfigException
 from kubernetes.client.rest import ApiException
 from openshift import client
 
-
 VERSION_RX = re.compile("V\d((alpha|beta)\d)?")
+
 
 class OpenShiftAnsibleModuleError(Exception):
     """
@@ -48,8 +48,13 @@ class OpenShiftAnsibleModule(AnsibleModule):
         self.namespaced = namespaced
 
         argument_spec = {
-            'state': {'default': 'present', 'choices': ['present', 'absent']},
-            'name': {'required': True},
+            'state': {
+                'default': 'present',
+                'choices': ['present', 'absent']
+            },
+            'name': {
+                'required': True
+            },
             'kubeconfig': {},
             'context': {}
         }
@@ -75,10 +80,13 @@ class OpenShiftAnsibleModule(AnsibleModule):
             if prop == 'metadata':
                 if not isinstance(prop_obj, client.V1ObjectMeta):
                     raise OpenShiftAnsibleModuleError(
-                        "Unknown metadata type: {}".format(sub_model_class)
+                        "Unknown metadata type: {}".format(prop_class)
                     )
                 argument_spec['labels'] = {'required': False, 'type': 'dict'}
-                argument_spec['annotations'] = {'required': False, 'type': 'dict'}
+                argument_spec['annotations'] = {
+                    'required': False,
+                    'type': 'dict'
+                }
                 if self.namespaced:
                     argument_spec['namespace'] = {'required': True}
             else:
@@ -90,10 +98,10 @@ class OpenShiftAnsibleModule(AnsibleModule):
                         'type': sub_prop_class.__name__
                     }
 
-        mutually_exclusive = None
-        required_together = None
-        required_one_of = None
-        required_if = None
+        # mutually_exclusive = None
+        # required_together = None
+        # required_one_of = None
+        # required_if = None
         AnsibleModule.__init__(self, argument_spec, supports_check_mode=True)
 
     def execute_module(self):
@@ -106,7 +114,8 @@ class OpenShiftAnsibleModule(AnsibleModule):
         labels = self.params.pop('labels', None)
 
         try:
-            config = self._get_client_config(kubeconfig, context)
+            # config = self._get_client_config(kubeconfig, context)
+            self._get_client_config(kubeconfig, context)
         except OpenShiftAnsibleModuleError as e:
             self.fail_json(msg='Error loading config', error=str(e))
 
@@ -142,20 +151,32 @@ class OpenShiftAnsibleModule(AnsibleModule):
         else:
             # state == 'present'
             if existing is None:
-                metadata = self.properties['metadata'](name=name, annotations=annotations, labels=labels)
+                metadata = self.properties['metadata'](
+                    name=name, annotations=annotations, labels=labels
+                )
 
                 prop_kwargs = {}
                 for prop_key in self.properties.keys():
-                    prop_params = [x for x in self.params.keys() if x.startswith(prop_key) and self.params[x] is not None]
+                    prop_params = [
+                        x for x in self.params.keys()
+                        if x.startswith(prop_key) and self.params[x] is
+                        not None
+                    ]
                     if len(prop_params) > 0:
-                        #print(prop_params)
+                        # print(prop_params)
                         # TODO: parse properties and set the params as appropriate
-                        self.fail_json(msg='Create with properties not implemented yet')
+                        self.fail_json(
+                            msg='Create with properties not implemented yet'
+                        )
 
-                camel_kind = string_utils.snake_case_to_camel(self.kind).capitalize()
-                k8s_object = self.model(api_version=self.api_version.lower(),
-                                        kind=camel_kind, metadata=metadata,
-                                        **prop_kwargs)
+                camel_kind = string_utils.snake_case_to_camel(self.kind
+                                                              ).capitalize()
+                k8s_object = self.model(
+                    api_version=self.api_version.lower(),
+                    kind=camel_kind,
+                    metadata=metadata,
+                    **prop_kwargs
+                )
 
                 if not self.check_mode:
                     create_method = self.__lookup_method('create')
@@ -180,11 +201,17 @@ class OpenShiftAnsibleModule(AnsibleModule):
                     changed = True
 
                 for prop_key in self.properties.keys():
-                    prop_params = [x for x in self.params.keys() if x.startswith(prop_key) and self.params[x] is not None]
+                    prop_params = [
+                        x for x in self.params.keys()
+                        if x.startswith(prop_key) and self.params[x] is
+                        not None
+                    ]
                     if len(prop_params) > 0:
-                        #print(prop_params)
+                        # print(prop_params)
                         # TODO: compare properties and update k8s_obj as appropriate
-                        self.fail_json(msg='Update with properties not implemented yet')
+                        self.fail_json(
+                            msg='Update with properties not implemented yet'
+                        )
 
                 if changed:
                     if not self.check_mode:
@@ -222,7 +249,10 @@ class OpenShiftAnsibleModule(AnsibleModule):
     @classmethod
     def __properties_from_model_obj(cls, model_obj):
         model_class = type(model_obj)
-        property_names = [x for x in dir(model_class) if isinstance(getattr(model_class, x), property)]
+        property_names = [
+            x for x in dir(model_class)
+            if isinstance(getattr(model_class, x), property)
+        ]
         properties = {}
         for name in property_names:
             prop_kind = model_obj.swagger_types[name]
@@ -242,7 +272,10 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
     @staticmethod
     def __properties_from_model(model_class):
-        return [x for x in dir(model_class) if isinstance(getattr(model_class, x), property)]
+        return [
+            x for x in dir(model_class)
+            if isinstance(getattr(model_class, x), property)
+        ]
 
     @staticmethod
     def _get_client_config(kubeconfig, context):
@@ -257,8 +290,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
             )
         except ConfigException as e:
             raise OpenShiftAnsibleModuleError(
-                "Error generating client configuration",
-                error=str(e)
+                "Error generating client configuration", error=str(e)
             )
         return config
 

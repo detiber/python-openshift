@@ -7,8 +7,7 @@ import yaml
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
 def test_project_delete_noop(ansible_module):
     contacted = ansible_module.openshift_v1_project(
-        name='test_delete_noop',
-        state='absent'
+        name='test_delete_noop', state='absent'
     )
 
     for host in contacted.keys():
@@ -16,14 +15,13 @@ def test_project_delete_noop(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] == False
+        assert result['changed'] is False
 
 
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
 def test_project_lifecycle(ansible_module):
     contacted = ansible_module.openshift_v1_project(
-        name='test-project-lifecycle',
-        state='present'
+        name='test-project-lifecycle', state='present'
     )
 
     for host in contacted.keys():
@@ -31,11 +29,10 @@ def test_project_lifecycle(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] == True
+        assert result['changed'] is True
 
     contacted = ansible_module.openshift_v1_project(
-        name='test-project-lifecycle',
-        state='present'
+        name='test-project-lifecycle', state='present'
     )
 
     for host in contacted.keys():
@@ -43,11 +40,10 @@ def test_project_lifecycle(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] == False
+        assert result['changed'] is False
 
     contacted = ansible_module.openshift_v1_project(
-        name='test-project-lifecycle',
-        state='absent'
+        name='test-project-lifecycle', state='absent'
     )
 
     for host in contacted.keys():
@@ -55,4 +51,4 @@ def test_project_lifecycle(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] == True
+        assert result['changed'] is True

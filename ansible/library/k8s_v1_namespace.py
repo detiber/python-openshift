@@ -2,8 +2,8 @@
 
 from __future__ import print_function
 
-from openshift.ansible import (
-    OpenShiftAnsibleModule, OpenShiftAnsibleModuleError)
+from openshift.ansible import OpenShiftAnsibleModule, OpenShiftAnsibleModuleError
+from ansible.module_utils.basic import BOOLEANS  # noqa: F401
 
 
 def main():
