@@ -8,7 +8,6 @@ from ansible.module_utils.basic import AnsibleModule
 
 from kubernetes import config
 from kubernetes.config.config_exception import ConfigException
-from kubernetes.client.rest import ApiException
 from openshift import client
 from openshift.helper import KubernetesObjectHelper
 
@@ -44,7 +43,6 @@ class OpenShiftAnsibleModule(AnsibleModule):
     def __init__(self, kind, api_version, namespaced=False):
         self.api_version = api_version
         self.kind = kind
-        self.model = self.__get_model(api_version, kind)
         self.namespaced = namespaced
         self.helper = KubernetesObjectHelper(api_version, kind)
 
@@ -60,16 +58,16 @@ class OpenShiftAnsibleModule(AnsibleModule):
             'context': {}
         }
 
-        model_obj = self.model()
-        self.properties = self.__properties_from_model_obj(model_obj)
+        properties = self.helper.properties
 
-        if 'metadata' not in list(self.properties.keys()):
+        if 'metadata' not in list(properties.keys()):
             raise OpenShiftAnsibleModuleError(
-                "Object {} does not contain metadata field".format(self.model)
+                "Object {} does not contain metadata field".
+                format(self.helper.model)
             )
 
-        for prop in list(self.properties.keys()):
-            prop_class = self.properties[prop]
+        for prop in list(properties.keys()):
+            prop_class = properties[prop]
             prop_obj = prop_class()
             prop_props = self.__properties_from_model_obj(prop_obj)
 
@@ -139,12 +137,12 @@ class OpenShiftAnsibleModule(AnsibleModule):
         else:
             # state == 'present'
             if existing is None:
-                metadata = self.properties['metadata'](
+                metadata = self.helper.properties['metadata'](
                     name=name, annotations=annotations, labels=labels
                 )
 
                 prop_kwargs = {}
-                for prop_key in list(self.properties.keys()):
+                for prop_key in list(self.helper.properties.keys()):
                     prop_params = [
                         x for x in list(self.params.keys())
                         if x.startswith(prop_key) and self.params[x] is
@@ -159,7 +157,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
                 camel_kind = string_utils.snake_case_to_camel(self.kind
                                                               ).capitalize()
-                k8s_object = self.model(
+                k8s_object = self.helper.model(
                     api_version=self.api_version.lower(),
                     kind=camel_kind,
                     metadata=metadata,
@@ -167,8 +165,9 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 )
 
                 if not self.check_mode:
-                    create_method = self.__lookup_method('create')
-                    k8s_object = create_method(k8s_object)
+                    k8s_object = self.helper.create_object(
+                        namespace, k8s_object
+                    )
 
                 return_attributes[self.kind] = k8s_object.to_dict()
                 return_attributes['changed'] = True
@@ -188,7 +187,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                     k8s_obj.metadata.annotations = annotations
                     changed = True
 
-                for prop_key in list(self.properties.keys()):
+                for prop_key in list(self.helper.properties.keys()):
                     prop_params = [
                         x for x in list(self.params.keys())
                         if x.startswith(prop_key) and self.params[x] is
@@ -203,36 +202,15 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
                 if changed:
                     if not self.check_mode:
-                        k8s_obj.status = None
-                        k8s_obj.metadata.resource_version = None
-                        patch_method = self.__lookup_method('patch')
-                        if self.namespaced:
-                            k8s_obj = patch_method(name, namespace, k8s_obj)
-                        else:
-                            k8s_obj = patch_method(name, k8s_obj)
+                        k8s_obj = self.helper.patch_object(
+                            name, namespace, k8s_obj
+                        )
                     return_attributes[self.kind] = k8s_obj.to_dict()
                     return_attributes['changed'] = True
                 else:
                     return_attributes[self.kind] = existing.to_dict()
 
                 self.exit_json(**return_attributes)
-
-    def __lookup_method(self, operation):
-        method_name = operation
-        if self.namespaced:
-            method_name += '_namespaced'
-        method_name += '_' + self.kind
-
-        apis = [x for x in dir(client.apis) if VERSION_RX.search(x)]
-        apis.append('OapiApi')
-
-        for api in apis:
-            api_class = getattr(client.apis, api)
-            method = getattr(api_class(), method_name, None)
-            if method is not None:
-                break
-
-        return method
 
     @classmethod
     def __properties_from_model_obj(cls, model_obj):
@@ -259,13 +237,6 @@ class OpenShiftAnsibleModule(AnsibleModule):
         return properties
 
     @staticmethod
-    def __properties_from_model(model_class):
-        return [
-            x for x in dir(model_class)
-            if isinstance(getattr(model_class, x), property)
-        ]
-
-    @staticmethod
     def _get_client_config(kubeconfig, context):
         try:
             # attempt to load the client config from file
@@ -281,10 +252,3 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 "Error generating client configuration", error=str(e)
             )
         return config
-
-    @staticmethod
-    def __get_model(api_version, kind):
-        camel_kind = string_utils.snake_case_to_camel(kind).capitalize()
-        model_name = api_version.capitalize() + camel_kind
-        model = getattr(client.models, model_name)
-        return model

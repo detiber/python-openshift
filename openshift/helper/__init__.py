@@ -11,15 +11,25 @@ VERSION_RX = re.compile("V\d((alpha|beta)\d)?")
 
 
 class KubernetesObjectHelper(object):
+    # TODO: add support for check mode to helper
     def __init__(self, api_version, kind):
         self.api_version = api_version
         self.kind = kind
         self.model = self.__get_model(api_version, kind)
 
+        model_obj = self.model()
+        self.properties = self.properties_from_model_obj(model_obj)
+
         # TODO: handle config better than just using default kubeconfig
         config.load_kube_config()
 
+    def update_object_properties(self, k8s_obj, properties):
+        # TODO: better error handling
+        # TODO: do recursive merge, but the object could be an object or a dict
+        pass
+
     def get_object(self, name, namespace=None):
+        # TODO: better error handling
         k8s_obj = None
         try:
             if namespace is None:
@@ -33,20 +43,67 @@ class KubernetesObjectHelper(object):
                 raise
         return k8s_obj
 
+    def new_object_from_kwargs(self, name, namespace=None, **kwargs):
+        pass
+
+    def patch_object(self, name, namespace, k8s_obj):
+        # TODO: better error handling
+        # TODO: add a parameter for waiting until the object is ready
+        k8s_obj.status = None
+        k8s_obj.metadata.resource_version = None
+        if namespace is None:
+            patch_method = self.__lookup_method('patch', False)
+            return_obj = patch_method(name, namespace, k8s_obj)
+        else:
+            patch_method = self.__lookup_method('patch', True)
+            return_obj = patch_method(name, k8s_obj)
+        return return_obj
+
+    def create_object(self, namespace, k8s_obj):
+        # TODO: better error handling
+        # TODO: add a parameter for waiting until the object is ready
+        if namespace is None:
+            create_method = self.__lookup_method('create', False)
+            return_obj = create_method(k8s_obj)
+        else:
+            create_method = self.__lookup_method('create', True)
+            return_obj = create_method(namespace, k8s_obj)
+        return return_obj
+
     def delete_object(self, name, namespace=None):
+        # TODO: better error handling
         # TODO: add a parameter for waiting until the object has been deleted
         # TODO: deleting a namespace requires a body
-        k8s_obj = None
-        try:
-            if namespace is None:
-                get_method = self.__lookup_method('delete', False)
-                k8s_obj = get_method(name)
+        if namespace is None:
+            delete_method = self.__lookup_method('delete', False)
+            delete_method(name)
+        else:
+            delete_method = self.__lookup_method('delete', True)
+            delete_method(name, namespace)
+
+    @classmethod
+    def properties_from_model_obj(cls, model_obj):
+        model_class = type(model_obj)
+        property_names = [
+            x for x in dir(model_class)
+            if isinstance(getattr(model_class, x), property)
+        ]
+        properties = {}
+        for name in property_names:
+            prop_kind = model_obj.swagger_types[name]
+            if prop_kind == 'str':
+                prop_class = str
+            elif prop_kind == 'int':
+                prop_class = int
+            elif prop_kind.startswith('list['):
+                prop_class = list
+            elif prop_kind.startswith('dict('):
+                prop_class = dict
             else:
-                get_method = self.__lookup_method('delete', True)
-                k8s_obj = get_method(name, namespace)
-        except ApiException as e:
-            if e.status != 404:
-                raise
+                prop_class = getattr(client.models, prop_kind)
+
+            properties[name] = prop_class
+        return properties
 
     def __lookup_method(self, operation, namespaced):
         # TODO: raise error if method not found
