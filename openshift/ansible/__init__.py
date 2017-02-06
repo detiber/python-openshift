@@ -10,6 +10,7 @@ from kubernetes import config
 from kubernetes.config.config_exception import ConfigException
 from kubernetes.client.rest import ApiException
 from openshift import client
+from openshift.helper import KubernetesObjectHelper
 
 #: Regex for finding versions
 VERSION_RX = re.compile("V\d((alpha|beta)\d)?")
@@ -45,6 +46,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
         self.kind = kind
         self.model = self.__get_model(api_version, kind)
         self.namespaced = namespaced
+        self.helper = KubernetesObjectHelper(api_version, kind)
 
         argument_spec = {
             'state': {
@@ -118,14 +120,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
         except OpenShiftAnsibleModuleError as e:
             self.fail_json(msg='Error loading config', error=str(e))
 
-        get_method = self.__lookup_method('read')
-
-        existing = None
-        try:
-            existing = get_method(name)
-        except ApiException as e:
-            if e.status != 404:
-                raise
+        existing = self.helper.get_object(name, namespace)
 
         return_attributes = {
             'changed': False,
@@ -138,13 +133,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 self.exit_json(**return_attributes)
             else:
                 if not self.check_mode:
-                    delete_method = self.__lookup_method('delete')
-                    # TODO: deleting a namespace requires a body, are there any other delete operations that require
-                    # more than a name?
-                    if self.namespaced:
-                        delete_method(name, namespace)
-                    else:
-                        delete_method(name)
+                    self.helper.delete_object(name, namespace)
                 return_attributes['changed'] = True
                 self.exit_json(**return_attributes)
         else:
