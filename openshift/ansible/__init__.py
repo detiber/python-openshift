@@ -107,9 +107,6 @@ class OpenShiftAnsibleModule(AnsibleModule):
 
         try:
             config = self._get_client_config(kubeconfig, context)
-            print(dir(config.new_client_from_config()))
-            print(dir(config.new_client_from_config().config))
-            print(config.new_client_from_config().config.auth_settings())
         except OpenShiftAnsibleModuleError as e:
             self.fail_json(msg='Error loading config', error=str(e))
 
@@ -134,6 +131,8 @@ class OpenShiftAnsibleModule(AnsibleModule):
             else:
                 if not self.check_mode:
                     delete_method = self.__lookup_method('delete')
+                    # TODO: deleting a namespace requires a body, are there any other delete operations that require
+                    # more than a name?
                     if self.namespaced:
                         delete_method(name, namespace)
                     else:
@@ -149,7 +148,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 for prop_key in self.properties.keys():
                     prop_params = [x for x in self.params.keys() if x.startswith(prop_key) and self.params[x] is not None]
                     if len(prop_params) > 0:
-                        print(prop_params)
+                        #print(prop_params)
                         # TODO: parse properties and set the params as appropriate
                         self.fail_json(msg='Create with properties not implemented yet')
 
@@ -183,12 +182,11 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 for prop_key in self.properties.keys():
                     prop_params = [x for x in self.params.keys() if x.startswith(prop_key) and self.params[x] is not None]
                     if len(prop_params) > 0:
-                        print(prop_params)
+                        #print(prop_params)
                         # TODO: compare properties and update k8s_obj as appropriate
                         self.fail_json(msg='Update with properties not implemented yet')
 
                 if changed:
-                    print(k8s_obj)
                     if not self.check_mode:
                         k8s_obj.status = None
                         k8s_obj.metadata.resource_version = None
@@ -219,7 +217,6 @@ class OpenShiftAnsibleModule(AnsibleModule):
             if method is not None:
                 break
 
-        print(method)
         return method
 
     @classmethod

@@ -5,8 +5,8 @@ import yaml
 # TODO: ensure created namespaces are cleaned up
 # TODO: use auto-generated names
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
-def test_namespace_delete_noop(ansible_module):
-    contacted = ansible_module.k8s_v1_namespace(
+def test_project_delete_noop(ansible_module):
+    contacted = ansible_module.openshift_v1_project(
         name='test_delete_noop',
         state='absent'
     )
@@ -16,14 +16,13 @@ def test_namespace_delete_noop(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] is False
+        assert result['changed'] == False
 
 
-@pytest.mark.skip()
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
-def test_namespace_lifecycle(ansible_module):
-    contacted = ansible_module.k8s_v1_namespace(
-        name='test-namespace-lifecycle',
+def test_project_lifecycle(ansible_module):
+    contacted = ansible_module.openshift_v1_project(
+        name='test-project-lifecycle',
         state='present'
     )
 
@@ -32,10 +31,10 @@ def test_namespace_lifecycle(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] is True
+        assert result['changed'] == True
 
-    contacted = ansible_module.k8s_v1_namespace(
-        name='test-namespace-create',
+    contacted = ansible_module.openshift_v1_project(
+        name='test-project-lifecycle',
         state='present'
     )
 
@@ -44,10 +43,10 @@ def test_namespace_lifecycle(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] is False
+        assert result['changed'] == False
 
-    contacted = ansible_module.k8s_v1_namespace(
-        name='test-namespace-create',
+    contacted = ansible_module.openshift_v1_project(
+        name='test-project-lifecycle',
         state='absent'
     )
 
@@ -56,4 +55,4 @@ def test_namespace_lifecycle(ansible_module):
         print(yaml.dump(result))
         assert 'failed' not in result.keys()
         assert 'changed' in result.keys()
-        assert result['changed'] is True
+        assert result['changed'] == True
