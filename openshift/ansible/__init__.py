@@ -66,7 +66,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 "Object {} does not contain metadata field".format(self.model)
             )
 
-        for prop in self.properties.keys():
+        for prop in list(self.properties.keys()):
             prop_class = self.properties[prop]
             prop_obj = prop_class()
             prop_props = self.__properties_from_model_obj(prop_obj)
@@ -89,7 +89,7 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 if self.namespaced:
                     argument_spec['namespace'] = {'required': True}
             else:
-                for sub_prop in prop_props.keys():
+                for sub_prop in list(prop_props.keys()):
                     sub_prop_class = prop_props[sub_prop]
 
                     argument_spec[prop + '_' + sub_prop] = {
@@ -155,9 +155,9 @@ class OpenShiftAnsibleModule(AnsibleModule):
                 )
 
                 prop_kwargs = {}
-                for prop_key in self.properties.keys():
+                for prop_key in list(self.properties.keys()):
                     prop_params = [
-                        x for x in self.params.keys()
+                        x for x in list(self.params.keys())
                         if x.startswith(prop_key) and self.params[x] is
                         not None
                     ]
@@ -199,9 +199,9 @@ class OpenShiftAnsibleModule(AnsibleModule):
                     k8s_obj.metadata.annotations = annotations
                     changed = True
 
-                for prop_key in self.properties.keys():
+                for prop_key in list(self.properties.keys()):
                     prop_params = [
-                        x for x in self.params.keys()
+                        x for x in list(self.params.keys())
                         if x.startswith(prop_key) and self.params[x] is
                         not None
                     ]
