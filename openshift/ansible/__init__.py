@@ -1,8 +1,6 @@
 import copy
 import json
 import re
-# import string
-# import yaml
 
 import string_utils
 
@@ -13,6 +11,7 @@ from kubernetes.config.config_exception import ConfigException
 from kubernetes.client.rest import ApiException
 from openshift import client
 
+#: Regex for finding versions
 VERSION_RX = re.compile("V\d((alpha|beta)\d)?")
 
 
