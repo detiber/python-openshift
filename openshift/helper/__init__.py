@@ -1,3 +1,4 @@
+import inspect
 import re
 
 import string_utils
@@ -5,6 +6,7 @@ import string_utils
 from kubernetes import config
 from kubernetes.client.rest import ApiException
 from openshift import client
+from openshift.client.models import V1DeleteOptions
 
 #: Regex for finding versions
 VERSION_RX = re.compile("V\d((alpha|beta)\d)?")
@@ -23,11 +25,6 @@ class KubernetesObjectHelper(object):
         # TODO: handle config better than just using default kubeconfig
         config.load_kube_config()
 
-    def update_object_properties(self, k8s_obj, properties):
-        # TODO: better error handling
-        # TODO: do recursive merge, but the object could be an object or a dict
-        pass
-
     def get_object(self, name, namespace=None):
         # TODO: better error handling
         k8s_obj = None
@@ -43,9 +40,6 @@ class KubernetesObjectHelper(object):
                 raise
         return k8s_obj
 
-    def new_object_from_kwargs(self, name, namespace=None, **kwargs):
-        pass
-
     def patch_object(self, name, namespace, k8s_obj):
         # TODO: better error handling
         # TODO: add a parameter for waiting until the object is ready
@@ -53,10 +47,10 @@ class KubernetesObjectHelper(object):
         k8s_obj.metadata.resource_version = None
         if namespace is None:
             patch_method = self.__lookup_method('patch', False)
-            return_obj = patch_method(name, namespace, k8s_obj)
+            return_obj = patch_method(name, k8s_obj)
         else:
             patch_method = self.__lookup_method('patch', True)
-            return_obj = patch_method(name, k8s_obj)
+            return_obj = patch_method(name, namespace, k8s_obj)
         return return_obj
 
     def create_object(self, namespace, k8s_obj):
@@ -70,16 +64,23 @@ class KubernetesObjectHelper(object):
             return_obj = create_method(namespace, k8s_obj)
         return return_obj
 
-    def delete_object(self, name, namespace=None):
+    def delete_object(self, name, namespace=None, delete_opts=None):
         # TODO: better error handling
         # TODO: add a parameter for waiting until the object has been deleted
         # TODO: deleting a namespace requires a body
         if namespace is None:
             delete_method = self.__lookup_method('delete', False)
-            delete_method(name)
+            print(inspect.getargspec(delete_method))
+            if 'body' in inspect.getargspec(delete_method).args:
+                delete_method(name, body=V1DeleteOptions())
+            else:
+                delete_method(name)
         else:
             delete_method = self.__lookup_method('delete', True)
-            delete_method(name, namespace)
+            if 'body' in inspect.getargspec(delete_method).args:
+                delete_method(name, namespace, body=V1DeleteOptions())
+            else:
+                delete_method(name, namespace)
 
     @classmethod
     def properties_from_model_obj(cls, model_obj):

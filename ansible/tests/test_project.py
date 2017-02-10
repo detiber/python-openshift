@@ -1,7 +1,10 @@
 import pytest
 import yaml
 
+pytestmark = pytest.mark.ansible
 
+
+# TODO: ensure created namespaces are cleaned up
 # TODO: ensure created namespaces are cleaned up
 # TODO: use auto-generated names
 @pytest.mark.ansible(host_pattern='localhost', connection='local')
