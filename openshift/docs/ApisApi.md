@@ -19,7 +19,7 @@ get available API versions
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class

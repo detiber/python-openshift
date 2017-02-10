@@ -18,7 +18,7 @@ import sys
 import unittest
 
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from openshift.client.models.v1_policy_binding_list import V1PolicyBindingList
 
 

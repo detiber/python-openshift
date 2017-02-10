@@ -18,7 +18,7 @@ import sys
 import unittest
 
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from openshift.client.models.v1_horizontal_pod_autoscaler_spec import V1HorizontalPodAutoscalerSpec
 
 

@@ -56,7 +56,9 @@ echo "--- Patching generated code..."
 find "${CLIENT_ROOT}/test" -type f -name \*.py -exec sed -i 's/\bclient/openshift.client/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.py -exec sed -i 's/^from \.\+configuration/from kubernetes.client.configuration/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.py -exec sed -i 's/^from \.\+rest/from kubernetes.client.rest/g' {} +
+find "${CLIENT_ROOT}/" -type f -name \*.py -exec sed -i 's/^from kubernetes.client.rest/from kubernetes.client.rest/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/\bclient/openshift.client/g' {} +
+find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/^from kubernetes.client.rest/from kubernetes.client.rest/g' {} +
 find "${CLIENT_ROOT}/" -type f -name \*.md -exec sed -i 's/openshift.client-python/client-python/g' {} +
 rm "${CLIENT_ROOT}/LICENSE" || true
 

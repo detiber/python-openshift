@@ -18,7 +18,7 @@ import sys
 import unittest
 
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from openshift.client.models.v1_pod_security_policy_subject_review_status import V1PodSecurityPolicySubjectReviewStatus
 
 

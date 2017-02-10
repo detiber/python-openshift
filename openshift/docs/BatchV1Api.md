@@ -31,7 +31,7 @@ create a Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -80,7 +80,7 @@ create a Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -131,7 +131,7 @@ delete collection of Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -190,7 +190,7 @@ delete a Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -247,7 +247,7 @@ get available resources
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -290,7 +290,7 @@ list or watch objects of kind Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -347,7 +347,7 @@ list or watch objects of kind Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -406,7 +406,7 @@ partially update the specified Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -459,7 +459,7 @@ partially update status of the specified Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -512,7 +512,7 @@ read the specified Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -567,7 +567,7 @@ read status of the specified Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -618,7 +618,7 @@ replace the specified Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -671,7 +671,7 @@ replace status of the specified Job
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class

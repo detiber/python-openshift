@@ -18,7 +18,7 @@ import sys
 import unittest
 
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from openshift.client.models.v1alpha1_certificate_signing_request_list import V1alpha1CertificateSigningRequestList
 
 

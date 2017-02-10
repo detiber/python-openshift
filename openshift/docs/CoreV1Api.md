@@ -267,7 +267,7 @@ connect DELETE requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -318,7 +318,7 @@ connect DELETE requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -371,7 +371,7 @@ connect DELETE requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -422,7 +422,7 @@ connect DELETE requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -475,7 +475,7 @@ connect DELETE requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -524,7 +524,7 @@ connect DELETE requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -575,7 +575,7 @@ connect GET requests to attach of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -634,7 +634,7 @@ connect GET requests to exec of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -695,7 +695,7 @@ connect GET requests to portforward of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -744,7 +744,7 @@ connect GET requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -795,7 +795,7 @@ connect GET requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -848,7 +848,7 @@ connect GET requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -899,7 +899,7 @@ connect GET requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -952,7 +952,7 @@ connect GET requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1001,7 +1001,7 @@ connect GET requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1052,7 +1052,7 @@ connect HEAD requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1103,7 +1103,7 @@ connect HEAD requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1156,7 +1156,7 @@ connect HEAD requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1207,7 +1207,7 @@ connect HEAD requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1260,7 +1260,7 @@ connect HEAD requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1309,7 +1309,7 @@ connect HEAD requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1360,7 +1360,7 @@ connect OPTIONS requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1411,7 +1411,7 @@ connect OPTIONS requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1464,7 +1464,7 @@ connect OPTIONS requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1515,7 +1515,7 @@ connect OPTIONS requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1568,7 +1568,7 @@ connect OPTIONS requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1617,7 +1617,7 @@ connect OPTIONS requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1668,7 +1668,7 @@ connect POST requests to attach of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1727,7 +1727,7 @@ connect POST requests to exec of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1788,7 +1788,7 @@ connect POST requests to portforward of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1837,7 +1837,7 @@ connect POST requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1888,7 +1888,7 @@ connect POST requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1941,7 +1941,7 @@ connect POST requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -1992,7 +1992,7 @@ connect POST requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2045,7 +2045,7 @@ connect POST requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2094,7 +2094,7 @@ connect POST requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2145,7 +2145,7 @@ connect PUT requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2196,7 +2196,7 @@ connect PUT requests to proxy of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2249,7 +2249,7 @@ connect PUT requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2300,7 +2300,7 @@ connect PUT requests to proxy of Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2353,7 +2353,7 @@ connect PUT requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2402,7 +2402,7 @@ connect PUT requests to proxy of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2453,7 +2453,7 @@ create a Binding
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2502,7 +2502,7 @@ create a ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2551,7 +2551,7 @@ create Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2600,7 +2600,7 @@ create an Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2649,7 +2649,7 @@ create a LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2698,7 +2698,7 @@ create a Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2747,7 +2747,7 @@ create a Binding
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2798,7 +2798,7 @@ create binding of a Binding
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2851,7 +2851,7 @@ create a ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2902,7 +2902,7 @@ create Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -2953,7 +2953,7 @@ create an Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3004,7 +3004,7 @@ create eviction of an Eviction
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3057,7 +3057,7 @@ create a LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3108,7 +3108,7 @@ create a PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3159,7 +3159,7 @@ create a Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3210,7 +3210,7 @@ create a PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3261,7 +3261,7 @@ create a ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3312,7 +3312,7 @@ create a ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3363,7 +3363,7 @@ create a Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3414,7 +3414,7 @@ create a Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3465,7 +3465,7 @@ create a ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3516,7 +3516,7 @@ create a Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3565,7 +3565,7 @@ create a PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3614,7 +3614,7 @@ create a PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3663,7 +3663,7 @@ create a Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3712,7 +3712,7 @@ create a PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3761,7 +3761,7 @@ create a ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3810,7 +3810,7 @@ create a ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3859,7 +3859,7 @@ create a Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3908,7 +3908,7 @@ create SecurityContextConstraints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -3957,7 +3957,7 @@ create a ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4006,7 +4006,7 @@ create a Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4055,7 +4055,7 @@ delete collection of Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4112,7 +4112,7 @@ delete collection of ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4171,7 +4171,7 @@ delete collection of Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4230,7 +4230,7 @@ delete collection of Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4289,7 +4289,7 @@ delete collection of LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4348,7 +4348,7 @@ delete collection of PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4407,7 +4407,7 @@ delete collection of Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4466,7 +4466,7 @@ delete collection of PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4525,7 +4525,7 @@ delete collection of ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4584,7 +4584,7 @@ delete collection of ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4643,7 +4643,7 @@ delete collection of Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4702,7 +4702,7 @@ delete collection of ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4761,7 +4761,7 @@ delete collection of Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4818,7 +4818,7 @@ delete collection of PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4875,7 +4875,7 @@ delete collection of SecurityContextConstraints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4932,7 +4932,7 @@ delete a Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -4987,7 +4987,7 @@ delete a ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5044,7 +5044,7 @@ delete Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5101,7 +5101,7 @@ delete an Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5158,7 +5158,7 @@ delete a LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5215,7 +5215,7 @@ delete a PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5272,7 +5272,7 @@ delete a Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5329,7 +5329,7 @@ delete a PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5386,7 +5386,7 @@ delete a ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5443,7 +5443,7 @@ delete a ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5500,7 +5500,7 @@ delete a Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5557,7 +5557,7 @@ delete a Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5608,7 +5608,7 @@ delete a ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5665,7 +5665,7 @@ delete a Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5720,7 +5720,7 @@ delete a PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5775,7 +5775,7 @@ delete SecurityContextConstraints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5830,7 +5830,7 @@ get available resources
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5873,7 +5873,7 @@ list objects of kind ComponentStatus
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5930,7 +5930,7 @@ list or watch objects of kind ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -5987,7 +5987,7 @@ list or watch objects of kind Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6044,7 +6044,7 @@ list or watch objects of kind Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6101,7 +6101,7 @@ list or watch objects of kind LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6158,7 +6158,7 @@ list or watch objects of kind Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6215,7 +6215,7 @@ list or watch objects of kind ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6274,7 +6274,7 @@ list or watch objects of kind Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6333,7 +6333,7 @@ list or watch objects of kind Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6392,7 +6392,7 @@ list or watch objects of kind LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6451,7 +6451,7 @@ list or watch objects of kind PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6510,7 +6510,7 @@ list or watch objects of kind Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6569,7 +6569,7 @@ list or watch objects of kind PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6628,7 +6628,7 @@ list or watch objects of kind ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6687,7 +6687,7 @@ list or watch objects of kind ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6746,7 +6746,7 @@ list or watch objects of kind Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6805,7 +6805,7 @@ list or watch objects of kind Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6864,7 +6864,7 @@ list or watch objects of kind ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6923,7 +6923,7 @@ list or watch objects of kind Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -6980,7 +6980,7 @@ list or watch objects of kind PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7037,7 +7037,7 @@ list or watch objects of kind PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7094,7 +7094,7 @@ list or watch objects of kind Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7151,7 +7151,7 @@ list or watch objects of kind PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7208,7 +7208,7 @@ list or watch objects of kind ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7265,7 +7265,7 @@ list or watch objects of kind ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7322,7 +7322,7 @@ list or watch objects of kind Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7379,7 +7379,7 @@ list or watch objects of kind SecurityContextConstraints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7436,7 +7436,7 @@ list or watch objects of kind ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7493,7 +7493,7 @@ list or watch objects of kind Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7550,7 +7550,7 @@ partially update the specified Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7601,7 +7601,7 @@ partially update status of the specified Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7652,7 +7652,7 @@ partially update the specified ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7705,7 +7705,7 @@ partially update the specified Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7758,7 +7758,7 @@ partially update the specified Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7811,7 +7811,7 @@ partially update the specified LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7864,7 +7864,7 @@ partially update the specified PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7917,7 +7917,7 @@ partially update status of the specified PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -7970,7 +7970,7 @@ partially update the specified Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8023,7 +8023,7 @@ partially update status of the specified Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8076,7 +8076,7 @@ partially update the specified PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8129,7 +8129,7 @@ partially update the specified ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8182,7 +8182,7 @@ partially update status of the specified ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8235,7 +8235,7 @@ partially update the specified ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8288,7 +8288,7 @@ partially update status of the specified ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8341,7 +8341,7 @@ partially update scale of the specified Scale
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8394,7 +8394,7 @@ partially update the specified Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8447,7 +8447,7 @@ partially update the specified Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8500,7 +8500,7 @@ partially update the specified ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8553,7 +8553,7 @@ partially update status of the specified Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8606,7 +8606,7 @@ partially update the specified Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8657,7 +8657,7 @@ partially update status of the specified Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8708,7 +8708,7 @@ partially update the specified PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8759,7 +8759,7 @@ partially update status of the specified PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8810,7 +8810,7 @@ partially update the specified SecurityContextConstraints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8861,7 +8861,7 @@ proxy DELETE requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8910,7 +8910,7 @@ proxy DELETE requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -8961,7 +8961,7 @@ proxy DELETE requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9010,7 +9010,7 @@ proxy DELETE requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9061,7 +9061,7 @@ proxy DELETE requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9108,7 +9108,7 @@ proxy DELETE requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9157,7 +9157,7 @@ proxy GET requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9206,7 +9206,7 @@ proxy GET requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9257,7 +9257,7 @@ proxy GET requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9306,7 +9306,7 @@ proxy GET requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9357,7 +9357,7 @@ proxy GET requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9404,7 +9404,7 @@ proxy GET requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9453,7 +9453,7 @@ proxy HEAD requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9502,7 +9502,7 @@ proxy HEAD requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9553,7 +9553,7 @@ proxy HEAD requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9602,7 +9602,7 @@ proxy HEAD requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9653,7 +9653,7 @@ proxy HEAD requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9700,7 +9700,7 @@ proxy HEAD requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9749,7 +9749,7 @@ proxy OPTIONS requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9798,7 +9798,7 @@ proxy OPTIONS requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9849,7 +9849,7 @@ proxy OPTIONS requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9898,7 +9898,7 @@ proxy OPTIONS requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9949,7 +9949,7 @@ proxy OPTIONS requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -9996,7 +9996,7 @@ proxy OPTIONS requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10045,7 +10045,7 @@ proxy POST requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10094,7 +10094,7 @@ proxy POST requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10145,7 +10145,7 @@ proxy POST requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10194,7 +10194,7 @@ proxy POST requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10245,7 +10245,7 @@ proxy POST requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10292,7 +10292,7 @@ proxy POST requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10341,7 +10341,7 @@ proxy PUT requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10390,7 +10390,7 @@ proxy PUT requests to Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10441,7 +10441,7 @@ proxy PUT requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10490,7 +10490,7 @@ proxy PUT requests to Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10541,7 +10541,7 @@ proxy PUT requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10588,7 +10588,7 @@ proxy PUT requests to Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10637,7 +10637,7 @@ read the specified ComponentStatus
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10686,7 +10686,7 @@ read the specified Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10739,7 +10739,7 @@ read status of the specified Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10788,7 +10788,7 @@ read the specified ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10843,7 +10843,7 @@ read the specified Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10898,7 +10898,7 @@ read the specified Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -10953,7 +10953,7 @@ read the specified LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11008,7 +11008,7 @@ read the specified PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11063,7 +11063,7 @@ read status of the specified PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11114,7 +11114,7 @@ read the specified Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11169,7 +11169,7 @@ read log of the specified Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11236,7 +11236,7 @@ read status of the specified Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11287,7 +11287,7 @@ read the specified PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11342,7 +11342,7 @@ read the specified ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11397,7 +11397,7 @@ read status of the specified ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11448,7 +11448,7 @@ read the specified ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11503,7 +11503,7 @@ read status of the specified ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11554,7 +11554,7 @@ read scale of the specified Scale
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11605,7 +11605,7 @@ read the specified Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11660,7 +11660,7 @@ read the specified Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11715,7 +11715,7 @@ read the specified ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11770,7 +11770,7 @@ read status of the specified Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11821,7 +11821,7 @@ read the specified Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11874,7 +11874,7 @@ read status of the specified Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11923,7 +11923,7 @@ read the specified PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -11976,7 +11976,7 @@ read status of the specified PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12025,7 +12025,7 @@ read the specified SecurityContextConstraints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12078,7 +12078,7 @@ replace the specified Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12129,7 +12129,7 @@ replace finalize of the specified Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12180,7 +12180,7 @@ replace status of the specified Namespace
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12231,7 +12231,7 @@ replace the specified ConfigMap
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12284,7 +12284,7 @@ replace the specified Endpoints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12337,7 +12337,7 @@ replace the specified Event
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12390,7 +12390,7 @@ replace the specified LimitRange
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12443,7 +12443,7 @@ replace the specified PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12496,7 +12496,7 @@ replace status of the specified PersistentVolumeClaim
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12549,7 +12549,7 @@ replace the specified Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12602,7 +12602,7 @@ replace status of the specified Pod
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12655,7 +12655,7 @@ replace the specified PodTemplate
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12708,7 +12708,7 @@ replace the specified ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12761,7 +12761,7 @@ replace status of the specified ReplicationController
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12814,7 +12814,7 @@ replace the specified ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12867,7 +12867,7 @@ replace status of the specified ResourceQuota
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12920,7 +12920,7 @@ replace scale of the specified Scale
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -12973,7 +12973,7 @@ replace the specified Secret
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13026,7 +13026,7 @@ replace the specified Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13079,7 +13079,7 @@ replace the specified ServiceAccount
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13132,7 +13132,7 @@ replace status of the specified Service
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13185,7 +13185,7 @@ replace the specified Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13236,7 +13236,7 @@ replace status of the specified Node
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13287,7 +13287,7 @@ replace the specified PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13338,7 +13338,7 @@ replace status of the specified PersistentVolume
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
@@ -13389,7 +13389,7 @@ replace the specified SecurityContextConstraints
 from __future__ import print_statement
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class

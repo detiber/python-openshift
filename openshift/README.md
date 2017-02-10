@@ -48,7 +48,7 @@ Please follow the [installation procedure](#installation--usage) and then run th
 from __future__ import print_function
 import time
 import openshift.client
-from openshift.client.rest import ApiException
+from kubernetes.client.rest import ApiException
 from pprint import pprint
 # create an instance of the API class
 api_instance = openshift.client.ApisApi()
