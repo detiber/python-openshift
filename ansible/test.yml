@@ -1,8 +1,0 @@
----
-- hosts: localhost
-  become: no
-  gather_facts: no
-  tasks:
-  - k8s_v1_namespace:
-      name: test
-      state: absent
